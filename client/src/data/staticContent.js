@@ -63,25 +63,42 @@ export const staticContent = {
       background_image: "/costs-bg.jpg"
     }
   ],
-  products: {
-    featured: {
-      title: "Smart Home Management",
-      description: "Transform your home with intelligent organization and proactive maintenance tracking",
-      image: "/hausset-icon.png"
+  products: [
+    {
+      id: "home-dashboard",
+      title: "Home Dashboard",
+      description: "Track your home's health score, assets, and upcoming maintenance",
+      image: "/images/screenshots/home-dashboard.png",
+      features: [
+        "Real-time health scoring",
+        "Asset tracking",
+        "Warranty management",
+        "Maintenance alerts"
+      ]
     },
-    features: [
-      {
-        title: "Proactive Maintenance",
-        description: "Never miss important home maintenance tasks again"
-      },
-      {
-        title: "Smart Organization",
-        description: "Keep track of all your home systems and appliances"
-      },
-      {
-        title: "Safety Monitoring",
-        description: "Get alerts for potential safety hazards"
-      }
-    ]
-  }
+    {
+      id: "asset-detail", 
+      title: "Asset Management",
+      description: "Detailed view of each home asset with photos, warranties, and service history",
+      image: "/images/screenshots/asset-detail.png",
+      features: [
+        "Photo documentation",
+        "Warranty tracking",
+        "Service schedules",
+        "Value monitoring"
+      ]
+    },
+    {
+      id: "analytics",
+      title: "Analytics & Insights",
+      description: "Understand your spending, track improvements, and plan maintenance",
+      image: "/images/screenshots/analytics.png", 
+      features: [
+        "Spending analytics",
+        "Health trends",
+        "Maintenance planning",
+        "Cost predictions"
+      ]
+    }
+  ]
 };

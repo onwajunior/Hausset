@@ -3,7 +3,7 @@
     "name": "Hausset",
     "tagline": "One organized hub, home troubles vanished",
     "description": "Transform your home management with smart organization and proactive maintenance tracking",
-    "logo": "/content/images/site/hausset-icon.png",
+    "logo": "/hausset-icon.png",
     "launch_date": "2025"
   },
   "hero": {
@@ -12,7 +12,7 @@
     "description": "Reactive Approach to Home Maintenance is Dangerous and Costly",
     "cta_text": "Get Early Access",
     "cta_link": "#contact",
-    "background_image": "/images/hero-bg.jpg"
+    "background_image": "/hero-bg.jpg"
   },
   "contact": {
     "email": "hello@calyptor.net",

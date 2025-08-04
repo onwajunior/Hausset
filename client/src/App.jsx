@@ -18,13 +18,21 @@ function App() {
   useEffect(() => {
     const loadContent = async () => {
       try {
+        console.log('🔄 Starting content load...');
         setLoading(true);
+        
+        // Check if we're in production
+        const isProduction = !window.location.hostname.includes('localhost');
+        console.log('🌍 Environment:', isProduction ? 'Production' : 'Development');
+        
         const data = await contentService.getAllContent();
+        console.log('✅ Content loaded successfully:', data);
         setContent(data);
         setError(null);
       } catch (err) {
-        console.error('Failed to load content from API, using static content:', err);
+        console.error('❌ Failed to load content from API, using static content:', err);
         // Fallback to static content when API is not available (e.g., in production)
+        console.log('🔄 Using static content fallback...');
         setContent(staticContent);
         setError(null);
       } finally {
@@ -49,10 +57,12 @@ function App() {
   }, [content]);
 
   if (loading) {
+    console.log('⏳ Showing loading spinner...');
     return <LoadingSpinner />;
   }
 
   if (error) {
+    console.log('❌ Showing error:', error);
     return (
       <div className="error-container">
         <div className="error-content">
@@ -67,9 +77,21 @@ function App() {
   }
 
   if (!content) {
-    return null;
+    console.log('❌ No content available');
+    return (
+      <div className="error-container">
+        <div className="error-content">
+          <h1>⚠️ No Content Available</h1>
+          <p>Unable to load website content. Please refresh the page.</p>
+          <button onClick={() => window.location.reload()} className="retry-button">
+            Refresh Page
+          </button>
+        </div>
+      </div>
+    );
   }
 
+  console.log('🎉 Rendering website with content:', content);
   return (
     <div className="App">
       <Header config={content.config} />

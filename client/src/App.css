@@ -1,0 +1,142 @@
+/* App-specific styles */
+.App {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Smooth scroll behavior for the entire app */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading and error states specific to App */
+.App .loading-container,
+.App .error-container {
+  background: var(--background-color);
+}
+
+/* Global section spacing */
+section {
+  position: relative;
+}
+
+/* Smooth transitions for dynamic content */
+.App * {
+  transition: inherit;
+}
+
+/* Ensure proper stacking context */
+.App > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Background patterns and effects */
+.App::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(66, 133, 244, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 107, 71, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(66, 133, 244, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Accessibility improvements */
+.App {
+  /* Ensure good focus indicators */
+}
+
+.App a:focus,
+.App button:focus,
+.App input:focus,
+.App textarea:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .App {
+    background: #000000;
+    color: #ffffff;
+  }
+  
+  .App .card {
+    border-color: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .App * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .App {
+    scroll-behavior: auto;
+  }
+}
+
+/* Print styles */
+@media print {
+  .App {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .App .contact-form,
+  .App .phone-mockup {
+    display: none;
+  }
+  
+  .App section {
+    page-break-inside: avoid;
+  }
+}
+
+/* Dark mode preference support */
+@media (prefers-color-scheme: dark) {
+  .App {
+    /* Theme will be applied via CSS variables from content */
+  }
+}
+
+/* Performance optimizations */
+.App img {
+  loading: lazy;
+  decoding: async;
+}
+
+/* Ensure proper viewport handling */
+@viewport {
+  width: device-width;
+  initial-scale: 1;
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  .App {
+    /* iOS Safari specific styles if needed */
+  }
+}
+
+/* Edge-specific fixes */
+@supports (-ms-ime-align: auto) {
+  .App {
+    /* Microsoft Edge specific styles if needed */
+  }
+}

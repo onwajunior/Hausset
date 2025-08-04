@@ -1,0 +1,21 @@
+{
+  "name": "hausset-website",
+  "version": "1.0.0",
+  "description": "Hausset - Home organization and safety management platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "cd server && npm run dev",
+    "client:dev": "cd client && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "content:watch": "cd server && npm run content:watch"
+  },
+  "keywords": ["hausset", "home", "organization", "safety", "maintenance"],
+  "author": "Hausset Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

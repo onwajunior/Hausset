@@ -7,6 +7,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
 import { contentService } from './services/contentService';
+import { staticContent } from './data/staticContent';
 import './App.css';
 
 function App() {
@@ -22,8 +23,10 @@ function App() {
         setContent(data);
         setError(null);
       } catch (err) {
-        console.error('Failed to load content:', err);
-        setError('Failed to load website content. Please refresh the page.');
+        console.error('Failed to load content from API, using static content:', err);
+        // Fallback to static content when API is not available (e.g., in production)
+        setContent(staticContent);
+        setError(null);
       } finally {
         setLoading(false);
       }

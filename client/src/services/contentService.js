@@ -1,6 +1,13 @@
 import axios from 'axios';
+import { staticContent } from '../data/staticContent';
 
 const API_BASE = '/api';
+
+// Check if we're in production without backend
+const isProductionWithoutBackend = () => {
+  return !window.location.hostname.includes('localhost') && 
+         !window.location.hostname.includes('127.0.0.1');
+};
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -85,6 +92,18 @@ export const contentService = {
 
   // Submit contact form
   async submitContact(formData) {
+    // In production without backend, provide fallback
+    if (isProductionWithoutBackend()) {
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Return success response
+      return {
+        success: true,
+        message: 'Thank you for your interest! Please contact us directly at hello@calyptor.net or call +1 (267) 319-9196'
+      };
+    }
+
     try {
       const response = await apiClient.post('/contact', formData);
       return response.data;

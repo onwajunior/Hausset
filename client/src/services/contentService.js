@@ -9,6 +9,9 @@ const isProductionWithoutBackend = () => {
          !window.location.hostname.includes('127.0.0.1');
 };
 
+// GitHub raw content URLs
+const GITHUB_BASE = 'https://raw.githubusercontent.com/onwajunior/Hausset/main/content';
+
 // Create axios instance with default config
 const apiClient = axios.create({
   baseURL: API_BASE,
@@ -39,13 +42,53 @@ apiClient.interceptors.response.use(
   }
 );
 
+// Fetch content from GitHub raw files
+const fetchFromGitHub = async () => {
+  try {
+    console.log('🔄 Fetching content from GitHub...');
+    
+    const [configRes, problemsRes, productsRes] = await Promise.all([
+      fetch(`${GITHUB_BASE}/config/site.json`),
+      fetch(`${GITHUB_BASE}/problems/problems.json`),
+      fetch(`${GITHUB_BASE}/products/screenshots.json`)
+    ]);
+
+    if (!configRes.ok || !problemsRes.ok || !productsRes.ok) {
+      throw new Error('Failed to fetch from GitHub');
+    }
+
+    const [config, problems, products] = await Promise.all([
+      configRes.json(),
+      problemsRes.json(),
+      productsRes.json()
+    ]);
+
+    console.log('✅ Successfully fetched content from GitHub');
+    return { config, problems, products };
+  } catch (error) {
+    console.error('❌ Failed to fetch from GitHub:', error);
+    throw error;
+  }
+};
+
 export const contentService = {
   // Get all content in one request
   async getAllContent() {
     try {
+      // First try local API (development)
       const response = await apiClient.get('/content/all');
       return response.data;
     } catch (error) {
+      // If local API fails, try GitHub in production
+      if (isProductionWithoutBackend()) {
+        try {
+          const githubContent = await fetchFromGitHub();
+          return githubContent;
+        } catch (githubError) {
+          console.error('GitHub fetch failed, using static content:', githubError);
+          return staticContent;
+        }
+      }
       throw new Error('Failed to load content');
     }
   },
@@ -56,6 +99,15 @@ export const contentService = {
       const response = await apiClient.get('/content/config');
       return response.data;
     } catch (error) {
+      if (isProductionWithoutBackend()) {
+        try {
+          const response = await fetch(`${GITHUB_BASE}/config/site.json`);
+          if (!response.ok) throw new Error('Failed to fetch config from GitHub');
+          return await response.json();
+        } catch (githubError) {
+          return staticContent.config;
+        }
+      }
       throw new Error('Failed to load site configuration');
     }
   },
@@ -66,6 +118,15 @@ export const contentService = {
       const response = await apiClient.get('/content/problems');
       return response.data;
     } catch (error) {
+      if (isProductionWithoutBackend()) {
+        try {
+          const response = await fetch(`${GITHUB_BASE}/problems/problems.json`);
+          if (!response.ok) throw new Error('Failed to fetch problems from GitHub');
+          return await response.json();
+        } catch (githubError) {
+          return staticContent.problems;
+        }
+      }
       throw new Error('Failed to load problems data');
     }
   },
@@ -76,6 +137,15 @@ export const contentService = {
       const response = await apiClient.get('/content/products');
       return response.data;
     } catch (error) {
+      if (isProductionWithoutBackend()) {
+        try {
+          const response = await fetch(`${GITHUB_BASE}/products/screenshots.json`);
+          if (!response.ok) throw new Error('Failed to fetch products from GitHub');
+          return await response.json();
+        } catch (githubError) {
+          return staticContent.products;
+        }
+      }
       throw new Error('Failed to load products data');
     }
   },

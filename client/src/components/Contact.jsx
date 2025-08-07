@@ -59,7 +59,7 @@ const Contact = ({ config }) => {
           <div className="contact-header">
             <h2>📧 Get in Touch</h2>
             <p className="contact-subtitle">
-              Ready to solve your challenges? Let's discuss how we can help you transform your home management.
+              Ready to collaborate with us? Let's discuss!
             </p>
           </div>
 

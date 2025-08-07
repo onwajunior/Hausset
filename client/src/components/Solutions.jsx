@@ -32,15 +32,15 @@ const Solutions = ({ products = [] }) => {
     <section id="solutions" className="solutions section">
       <div className="container">
         <div className="section-header">
-          <h2>Experience our platform</h2>
+          <h2>Our Product</h2>
           <p className="section-subtitle">
-            Ready to build something amazing? Our solution transforms how you approach home management. 
-            This premium platform gives you everything you need to launch with confidence.
+            Our solution provides homeowners with a single, organized hub to eliminate home troubles.
+            Giving users peace of mind and a stress-free home.
           </p>
           
-          <button onClick={scrollToContact} className="btn btn-primary btn-large cta-button">
+          {/*<button onClick={scrollToContact} className="btn btn-primary btn-large cta-button">
             Get started for free
-          </button>
+          </button>*/}
         </div>
 
         <div className="solutions-showcase">

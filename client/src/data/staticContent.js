@@ -6,7 +6,7 @@ export const staticContent = {
       tagline: "One organized hub, home troubles vanished",
       description: "Transform your home management with smart organization and proactive maintenance tracking",
       logo: "/hausset-icon.png",
-      launch_date: "2025"
+      launch_date: "2026"
     },
     hero: {
       title: "Hausset",

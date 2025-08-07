@@ -138,9 +138,9 @@ const Footer = ({ config }) => {
             <p className="copyright">
               © {currentYear} {config?.company?.name || 'Hausset'}. All rights reserved.
             </p>
-            <p className="built-with">
+            {/*<p className="built-with">
               Built with ❤️ and code
-            </p>
+            </p>*/}
           </div>
         </div>
       </div>
